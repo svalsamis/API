@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { assign, cloneDeep } from 'lodash-es';
 import { FuseMockApiService, FuseMockApiUtils } from '@fuse/lib/mock-api';
 import { messages as messagesData } from 'app/mock-api/common/messages/data';
+import { appConfig } from 'app/core/config/app.config';
+import { GlobalFramework } from 'app/core/framework/GlobalFramework';
 
 @Injectable({
     providedIn: 'root'
@@ -28,6 +30,7 @@ export class MessagesMockApi
      */
     registerHandlers(): void
     {
+        console.log(GlobalFramework.AppSettings.hermesHubUrl);
         // -----------------------------------------------------------------------------------------------------
         // @ Messages - GET
         // -----------------------------------------------------------------------------------------------------

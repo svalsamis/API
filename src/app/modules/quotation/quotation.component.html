@@ -1,0 +1,72 @@
+<div class="flex flex-col flex-auto min-w-0 w-full min-w-full max-w-full h-full min-h-full max-h-full quotation" >
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+      <div class="flex-1 min-w-0">
+          <!-- Breadcrumbs -->
+          <!-- <div class="flex flex-wrap items-center font-medium">
+              <div>
+                  <a class="whitespace-nowrap text-primary-500">User Interface</a>
+              </div>
+          </div> -->
+          <!-- Title -->
+          <div class="mt-2">
+              <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                  Προσφορές
+              </h2>
+          </div>
+      </div>
+      <!-- Actions -->
+      <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+          <button mat-raised-button [matMenuTriggerFor]="menuRef" color="primary">
+            
+            <mat-icon
+                class="icon-size-5 mr-2"
+                [svgIcon]="'heroicons_outline:folder'"></mat-icon>
+                Αρχεία Προσφορών
+          </button>
+          
+          <mat-menu #menuRef="matMenu">
+              <button mat-menu-item *ngFor="let component of components">
+                  <i class="menu-branch fa mr-2" [ngClass]="component.image"></i>{{component.name}}
+              </button>
+              
+          </mat-menu>
+          
+          
+      </div>
+    </div>
+    <div class="flex-auto p-6 sm:p-10">
+      <div class="max-w-4xl prose prose-sm">
+          
+          <p>
+              Following, you can find links to the official documentation. Click on the component you want to
+              learn more about and it will redirect you to the related section of the official documentation.
+          </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 mt-8 text-center">
+          <ng-container *ngFor="let component of components">
+              
+              <a
+                  class="flex flex-col rounded-2xl shadow overflow-hidden bg-card hover:shadow-xl transition-shadow duration-200 ease-in-out quotation-card"
+                  [routerLink]="['/quotation/auto']" routerLinkActive="router-link-active" 
+                  rel="noreferrer">
+                  <i class="branch fa" [ngClass]="component.image" ></i>
+                  <!-- <svg width="150" height="150" viewBox="0 0 150 150" style="fill: var(--fuse-primary);">
+                      <use xlink:href="{{'assets/images/' + component.id + '.svg'}}"></use>
+                  </svg> -->
+                  <div class="py-4 px-5 text-left">
+                      <div class="text-xl font-semibold">{{component.name}}</div>
+                      <div class="mt-1 text-secondary">{{component.summary}}</div>
+                  </div>
+              </a>
+              
+              
+          </ng-container>
+      </div>
+
+  </div>
+    <!-- Main -->
+  
+  
+</div>

@@ -8,6 +8,7 @@ import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
+import { InfodromioUser } from 'app/core/framework/InfodromioUser';
 
 @Component({
     selector     : 'classy-layout',
@@ -18,7 +19,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
 {
     isScreenSmall: boolean;
     navigation: Navigation;
-    user: User;
+    user: InfodromioUser;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -66,7 +67,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
         // Subscribe to the user service
         this._userService.user$
             .pipe((takeUntil(this._unsubscribeAll)))
-            .subscribe((user: User) => {
+            .subscribe((user: InfodromioUser) => {
                 this.user = user;
             });
 

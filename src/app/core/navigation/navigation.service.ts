@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, ReplaySubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Navigation } from 'app/core/navigation/navigation.types';
+import { GlobalFramework } from '../framework/GlobalFramework';
 
 @Injectable({
     providedIn: 'root'
@@ -39,6 +40,7 @@ export class NavigationService
      */
     get(): Observable<Navigation>
     {
+        console.log(GlobalFramework.AppSettings.hermesHubUrl);
         return this._httpClient.get<Navigation>('api/common/navigation').pipe(
             tap((navigation) => {
                 this._navigation.next(navigation);

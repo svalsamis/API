@@ -9,14 +9,14 @@ import { InitialDataResolver } from 'app/app.resolvers';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/example'
-    {path: '', pathMatch : 'full', redirectTo: 'example'},
+    {path: '', pathMatch : 'full', redirectTo: 'quotation'},
 
     // Redirect signed in user to the '/example'
     //
     // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
     // path. Below is another redirection for that path to redirect the user to the desired
     // location. This is a small convenience to keep all main routes together here on this file.
-    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'example'},
+    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'quotation'},
 
     // Auth routes for guests
     {
@@ -75,5 +75,43 @@ export const appRoutes: Route[] = [
         children   : [
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
         ]
+    },
+    {
+        path                : '',
+        canActivate         : [AuthGuard],
+        canActivateChild    : [AuthGuard],
+        component           : LayoutComponent,
+        resolve             : {
+            initialData: InitialDataResolver,
+        },
+        children            : [
+            {path: 'customers', loadChildren: () => import('app/modules/customers/customers.module').then(m => m.CustomersModule)},
+        ]
+    },
+    {
+        path                : '',
+        canActivate         : [AuthGuard],
+        canActivateChild    : [AuthGuard],
+        component           : LayoutComponent,
+        resolve             : {
+            initialData: InitialDataResolver,
+        },
+        children            : [
+            {path: 'quotation', loadChildren: () => import('app/modules/quotation/quotation.module').then(m => m.QuotationModule)},
+        ]
+    },
+    {
+        path                : 'quotation',
+        canActivate         : [AuthGuard],
+        canActivateChild    : [AuthGuard],
+        component           : LayoutComponent,
+        resolve             : {
+            initialData: InitialDataResolver,
+        },
+        children            : [
+            {path: 'auto', loadChildren: () => import('app/modules/quotation/quotation-auto/quotation-auto.module').then(m => m.QuotationAutoModule)},
+        ]
     }
+
+
 ];

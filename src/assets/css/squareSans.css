@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-thin.eot');
+    src: url('../fonts/squaresans/squaresans-thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-thin.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-thin.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-thin.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-thin.svg#squaresans-thin') format('svg');
+    font-style: normal;
+    font-weight: 200;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-thinitalic.eot');
+    src: url('../fonts/squaresans/squaresans-thinitalic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-thinitalic.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-thinitalic.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-thinitalic.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-thinitalic.svg#squaresans-thinitalic') format('svg');
+    font-style: italic;
+    font-weight: 200;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-light.eot');
+    src: url('../fonts/squaresans/squaresans-light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-light.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-light.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-light.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-light.svg#squaresans-light') format('svg');
+    font-style: normal;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-lightitalic.eot');
+    src: url('../fonts/squaresans/squaresans-lightitalic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-lightitalic.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-lightitalic.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-lightitalic.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-lightitalic.svg#squaresans-lightitalic') format('svg');
+    font-style: italic;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-regular.eot');
+    src: url('../fonts/squaresans/squaresans-regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-regular.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-regular.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-regular.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-regular.svg#squaresans-regular') format('svg');
+    font-style: normal;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-italic.eot');
+    src: url('../fonts/squaresans/squaresans-italic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-italic.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-italic.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-italic.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-italic.svg#squaresans-italic') format('svg');
+    font-style: italic;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-medium.eot');
+    src: url('../fonts/squaresans/squaresans-medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-medium.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-medium.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-medium.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-medium.svg#squaresans-medium') format('svg');
+    font-style: normal;
+    font-weight: 600;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-mediumitalic.eot');
+    src: url('../fonts/squaresans/squaresans-mediumitalic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-mediumitalic.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-mediumitalic.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-mediumitalic.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-mediumitalic.svg#squaresans-mediumitalic') format('svg');
+    font-style: italic;
+    font-weight: 600;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-bold.eot');
+    src: url('../fonts/squaresans/squaresans-bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-bold.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-bold.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-bold.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-bold.svg#squaresans-bold') format('svg');
+    font-style: normal;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-bolditalic.eot');
+    src: url('../fonts/squaresans/squaresans-bolditalic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-bolditalic.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-bolditalic.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-bolditalic.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-bolditalic.svg#squaresans-bolditalic') format('svg');
+    font-style: italic;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-black.eot');
+    src: url('../fonts/squaresans/squaresans-black.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-black.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-black.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-black.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-black.svg#squaresans-black') format('svg');
+    font-style: normal;
+    font-weight: 900;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'SquareSans';
+    src: url('../fonts/squaresans/squaresans-blackitalic.eot');
+    src: url('../fonts/squaresans/squaresans-blackitalic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/squaresans/squaresans-blackitalic.woff2') format('woff2'),
+    url('../fonts/squaresans/squaresans-blackitalic.woff') format('woff'),
+    url('../fonts/squaresans/squaresans-blackitalic.ttf') format('truetype'),
+    url('../fonts/squaresans/squaresans-blackitalic.svg#squaresans-blackitalic') format('svg');
+    font-style: italic;
+    font-weight: 900;
+    text-rendering: optimizeLegibility;
+    font-display: block;
+}

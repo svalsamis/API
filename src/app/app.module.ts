@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
@@ -12,12 +12,35 @@ import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
+import { SignalRConfiguration, SignalRModule } from 'ng2-signalr';
+import { SignalRHelperService } from './core/services/signalR-helper.service';
+import { AuthService } from './core/auth/auth.service';
+import { LoadSettingsService } from './core/services/load-settings.service';
 
 const routerConfig: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
     preloadingStrategy       : PreloadAllModules
 };
-
+export function createConfig(): SignalRConfiguration {
+    const c = new SignalRConfiguration();
+    c.hubName = 'eventhub';
+    //c.qs = { user: 'donald' };
+    c.url = 'http://localhost:64696/signalr';
+    c.logging = true;
+    
+    // >= v5.0.0
+    c.executeEventsInZone = true; // optional, default is true
+    c.executeErrorsInZone = false; // optional, default is false
+    c.executeStatusChangeInZone = true; // optional, default is true
+    return c;
+}
+export function loadSettings(srv: LoadSettingsService) {
+    return () => {
+      srv.loadSettings();
+    }
+      
+    
+  }
 @NgModule({
     declarations: [
         AppComponent
@@ -37,12 +60,17 @@ const routerConfig: ExtraOptions = {
 
         // Layout module of your application
         LayoutModule,
-
+        SignalRModule.forRoot(createConfig),
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({})
     ],
     bootstrap   : [
         AppComponent
+    ],
+    providers: [SignalRHelperService,
+        {
+            provide: APP_INITIALIZER, useFactory: loadSettings, deps: [LoadSettingsService], multi:true
+        }
     ]
 })
 export class AppModule

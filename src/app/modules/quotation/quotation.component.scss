@@ -1,0 +1,21 @@
+.quotation {
+    i.branch {
+        font-size: 72px;
+        color:var(--fuse-accent-700)!important;
+        text-shadow: 5px 5px 5px rgba(0,0,0,.5)!important;
+    }
+    .quotation-card {
+        &:hover {
+            i.branch {
+                color: var(--fuse-primary-900)!important;
+                transition-property: color;
+                transition-delay: 200;
+                transition: ease-in-out;
+            }
+        }
+    }
+    i.menu-branch {
+        color:var(--fuse-accent-700)!important;
+        text-shadow: 5px 5px 5px rgba(0,0,0,.5)!important;
+    }
+}

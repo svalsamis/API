@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
+import { InfodromioUser } from 'app/core/framework/InfodromioUser';
 
 @Component({
     selector       : 'user',
@@ -20,7 +21,7 @@ export class UserComponent implements OnInit, OnDestroy
     /* eslint-enable @typescript-eslint/naming-convention */
 
     @Input() showAvatar: boolean = true;
-    user: User;
+    user: InfodromioUser;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -33,6 +34,7 @@ export class UserComponent implements OnInit, OnDestroy
         private _userService: UserService
     )
     {
+        
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -47,7 +49,7 @@ export class UserComponent implements OnInit, OnDestroy
         // Subscribe to user changes
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((user: User) => {
+            .subscribe((user: InfodromioUser) => {
                 this.user = user;
 
                 // Mark for check
@@ -83,10 +85,7 @@ export class UserComponent implements OnInit, OnDestroy
         }
 
         // Update the user
-        this._userService.update({
-            ...this.user,
-            status
-        }).subscribe();
+        this._userService.update(this.user).subscribe();
     }
 
     /**

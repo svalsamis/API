@@ -1,0 +1,178 @@
+<div class="flex flex-col flex-auto min-w-0 w-full min-w-full max-w-full prose h-full min-h-full max-h-full customers-browser" >
+
+  <!-- Main -->
+  <div class="flex-auto w-full min-w-full max-w-full h-full min-h-full max-h-full">
+      <!-- CONTENT GOES HERE -->
+      <div class="w-full min-w-full max-w-full min-h-full max-h-full h-full p-4">
+        
+        <dx-data-grid id="gridContainer"
+                [dataSource]="Clients"
+                height="calc(100vh - 120px)"
+                width="100%"
+                [showRowLines]="true"
+                [remoteOperations]="true"
+                [columnAutoWidth]="true"
+                [hoverStateEnabled]="true"
+                [cellHintEnabled]="true"
+                [allowColumnResizing]="true"
+                [focusedRowEnabled]="true"
+                dateSerializationFormat="dd/MM/yyyy"
+                (onToolbarPreparing)="onToolbarPreparing($event)"
+                (onRowPrepared)="onRowPrepared($event)"
+                (onContentReady)="onContentReady($event)"
+                (onSelectionChanged)="getSelectedItems($event)"
+                (onRowDblClick)="editButtonClicked($event.data)">
+    <dxo-selection [mode]="selectionMode" [allowSelectAll]="false" showCheckBoxesMode="always"></dxo-selection>
+    <dxo-scrolling mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+    <!-- <dxo-scrolling mode="infinite" rowRenderingMode="virtual"></dxo-scrolling> -->
+    <dxo-load-panel [text]="GridHelper.loadText"></dxo-load-panel>
+    <dxo-filter-row betweenStartText="από"
+                    betweenEndText="έως"
+                    resetOperationText="καθαρισμός φίλτρου"
+                    [visible]="true"
+                    [operationDescriptions]="GridHelper.operationDescriptions"></dxo-filter-row>
+    <dxo-header-filter [visible]="true" [texts]="GridHelper.headerTexts"></dxo-header-filter>
+    <dxo-search-panel [visible]="true" [width]="240" searchVisibleColumnsOnly="true" [placeholder]="GridHelper.searchText"></dxo-search-panel>
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-paging [pageSize]="30"></dxo-paging>
+    <dxi-column name="command"
+                [allowSearch]="false"
+                [allowFiltering]="false"
+                [allowSorting]="false"
+                cellTemplate="commandTemplate" [width]="60">
+                <!-- <div *dxTemplate="let cell of 'commandTemplate'" class="text-center pointer btn-status" [id]="'row_' + cell.data.ItemId" [ngClass]="cell.row.data.notificationStatus?.iconColorClass">
+                  <dx-button (click)="editButtonClicked(cell.data)" >
+
+                    <i class="fa" *ngIf="!cell.data.ProducerId" aria-hidden="true" [ngClass]="cell.row.data.notificationStatus?.statusIconClass" style="color:inherit!important"></i>
+                  </dx-button>
+                </div> -->
+                <div *dxTemplate="let cell of 'commandTemplate'" class="text-center">
+                  <button mat-raised-button (click)="editButtonClicked(cell.data)" *ngIf="cell.data.ProducerId == currentProductionCode" color="primary">...</button>
+                  <button mat-raised-button (click)="editButtonClicked(cell.data)"  *ngIf="cell.data.ProducerId != currentProductionCode">...</button>
+                  
+
+                </div>
+    </dxi-column>
+    <dxi-column name="consumer"
+                [allowSearch]="false"
+                [allowFiltering]="false"
+                [allowSorting]="false"
+                cellTemplate="consumerTemplate" [width]="60">
+                <div *dxTemplate="let cell of 'consumerTemplate'">
+                  <ng-container *ngIf="cell.data.ProducerId && cell.data.SalespointUserId && cell.data.SalespointUserId != 0 && cell.data.PhotoUrl && cell.data.PhotoUrl.length > 0">
+                    <img src="{{cell.data.PhotoUrl}}" style="border-radius:5px;width:30px;height:30px;margin-top:0px; margin-bottom:0px;">
+                  </ng-container>
+                  <ng-container *ngIf="cell.data.ProducerId && cell.data.SalespointUserId && cell.data.SalespointUserId != 0 && (!cell.data.PhotoUrl || cell.data.PhotoUrl.length == 0)">
+                    <div class='text-center' style='border-radius:50%; background-color: #03a9f4; color:white; width:30px; height:30px; line-height:30px; font-weight:700; font-size:14px; margin: auto'>{{getInitials(cell.data)}}</div>
+                  </ng-container>
+                  <ng-container *ngIf="cell.data.ProducerId && (!cell.data.SalespointUserId || cell.data.SalespointUserId == 0)">
+                    <div class='text-center' style='color:orange'><i class='fa fa-check-circle fa-lg'></i></div>
+                  </ng-container>
+                  <ng-container *ngIf="!cell.data.ProducerId || cell.data.ProducerId == ''">
+                    <dx-button (click)="confirmClient(cell.data)" [id]="'btnConfirm_' + cell.data.ItemId" >
+
+                      <i class="fa fa-user-plus h-14"  aria-hidden="true" style="color:inherit!important;"></i>
+                    </dx-button>
+                  </ng-container>
+                </div>
+    </dxi-column>
+    <dxi-column dataField="ItemId" caption="ID" [allowSearch]="false" [filterOperations]="['=']" selectedFilterOperation="=" [width]="80" [allowHeaderFiltering]="false">
+        <dxo-filter-row [showOperationChooser]="false"></dxo-filter-row>
+    </dxi-column>
+    <dxi-column dataField="LastName" caption="Επώνυμο" [allowSearch]="false" [width]="200" [visible]="false"></dxi-column>
+    <dxi-column dataField="FirstName" caption="Ονομα" [allowSearch]="false" [width]="100" [visible]="false"></dxi-column>
+    <dxi-column dataField="DisplayName" caption="Επωνυμία Πελάτη"  sortOrder="asc" [width]="200" [filterOperations]="['contains','startswith','=']" selectedFilterOperation="contains" [allowHeaderFiltering]="false">
+        <dxo-filter-row></dxo-filter-row>
+    </dxi-column>
+    <dxi-column dataField="Vat" caption="Α.Φ.Μ"  [width]="80" [filterOperations]="['=']" selectedFilterOperation="=" [allowHeaderFiltering]="false">
+        <dxo-filter-row></dxo-filter-row>
+    </dxi-column>
+    <dxi-column dataField="Address" caption="Οδός-αριθμός" [visible]="false">
+
+    </dxi-column>
+    <dxi-column dataField="PostalCode" caption="ΤΚ" [filterOperations]="['=']" selectedFilterOperation="=" [allowHeaderFiltering]="false"></dxi-column>
+    <dxi-column dataField="Municipality" caption="Δήμος-Περιοχή" [filterOperations]="['contains','startswith','=']" selectedFilterOperation="startswith" [allowHeaderFiltering]="false">
+        <dxo-filter-row></dxo-filter-row>
+    </dxi-column>
+    <dxi-column dataField="Region" caption="Νομός" [filterOperations]="['contains','startswith','=']" selectedFilterOperation="startswith" [allowHeaderFiltering]="false">
+      <dxo-filter-row></dxo-filter-row>
+     </dxi-column>
+    <dxi-column dataField="eMail" caption="E-Mail"
+                [filterOperations]="['contains','startswith','=']"
+                selectedFilterOperation="="
+                [allowHeaderFiltering]="false" >
+        <dxo-filter-row></dxo-filter-row>
+    </dxi-column>
+    <dxi-column dataField="phone"
+                caption="Τηλέφωνο"
+                [filterOperations]="['contains','startswith','=']"
+                selectedFilterOperation="="
+                [allowHeaderFiltering]="false" >
+
+        <dxo-filter-row></dxo-filter-row>
+    </dxi-column>
+    <dxi-column dataField="mobile"
+                caption="Κινητό"
+                [filterOperations]="['contains','startswith','=']"
+                selectedFilterOperation="="
+                [allowHeaderFiltering]="false" >
+
+        <dxo-filter-row></dxo-filter-row>
+
+    </dxi-column>
+    <dxi-column dataField="BirthDate" [allowSearch]="false" caption="Ημ/νία Γέννησης" format="dd/MM/yyyy" dataType="date" [visible]="false" [filterOperations]="['between']" selectedFilterOperation="between">
+      <dxo-filter-row [showOperationChooser]="false" betweenStartText='από' betweenStartText='έως'></dxo-filter-row>
+    </dxi-column>
+    <dxi-column dataField="Occupation"
+                caption="Επάγγελμα"
+                [visible]="false"
+                [filterOperations]="['contains','startswith','=']"
+                selectedFilterOperation="contains"
+                [allowHeaderFiltering]="false">
+
+        <dxo-filter-row></dxo-filter-row>
+    </dxi-column>
+    <dxi-column dataField="TaxOffice"
+                caption="Δ.Ο.Υ"
+                [allowSearch]="false"
+                [visible]="false"
+                [visible]="false"
+                [filterOperations]="['contains','startswith','=']"
+                selectedFilterOperation="contains"
+                [allowHeaderFiltering]="false">
+    </dxi-column>
+    <dxi-column dataField="Producer" caption="Συνεργάτης">
+          <dxo-header-filter [dataSource]='partners'></dxo-header-filter>
+    </dxi-column>
+    <div *dxTemplate="let data of 'lblTotalRecords'">
+        <div *ngIf="totalRecords == 0" class="px-16">Δεν βρέθηκαν εγγραφές</div>
+        <div *ngIf="totalRecords > 0" class="px-16" style="font-style: italic;">Βρέθηκαν <strong>{{totalRecords}}</strong> εγγραφές</div>
+    </div>
+    <div *dxTemplate="let data of 'checkMyClients'">
+      <div *ngIf="isAdmin" class="px-16">
+        <mat-checkbox [value]="myClientsFlag" color="accent">Μόνο τους προσωπικούς μου Πελάτες</mat-checkbox>
+      </div>
+
+    </div>
+    <div *dxTemplate="let data of 'mergeConfirmation'">
+      <div fxLayout="row" class="merge-command-panel">
+        <i class="fa fa-info-circle mr-16 pointer accent-fg font-size-32" id="merge-command-panel" (click)="showMergeTooltip = true"></i>Μαρκάρετε τους πελάτες που θέλετε να συγχωνεύσετε
+        <dx-button
+              text="Συγχώνευση"
+              type="default"
+              class="ml-12 mr-8" [disabled]="selectedItems.length <= 1"
+              (click)="goMerge()">
+        </dx-button>
+        <dx-button
+              text="Ακυρο"
+              (click)="cancelMerge()">
+        </dx-button>
+
+      </div>
+
+    </div>
+  </dx-data-grid>
+         
+      </div>
+
+</div>

@@ -5,7 +5,50 @@
 
         <!-- CONTENT GOES HERE -->
         <div class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl">
-dgfhdhdfhdf dfghfghfgh
+            <div class="flex flex-row">
+                    <div class="flex-none p-6">
+                        <button mat-raised-button (click)="testCount()" color="primary">Count Operator</button>
+                    </div>
+                    <div class="flex-none p-6">
+                        <button mat-raised-button (click)="testUsingSubjects()" color="primary">Testing Subjects</button>
+                    </div>
+                    <div class="flex-none p-6">
+                        <button mat-raised-button (click)="testAjaxRequest()" color="primary">Ajax Request</button>
+                    </div>
+                    
+                    <div class="flex-none p-6">
+                        <button mat-raised-button (click)="testSignalR()" color="primary">Testing SignalR</button>
+                    </div>
+             </div>
+             <ng-container *ngIf="(view | async) == 'HERMES_MULTI'">
+                <div class="flex flex-col" *ngFor="let quote of quotes | async">
+                    <div class="flex flex-row">
+                        <div class="flex-auto">
+                            {{quote.id}}
+                        </div>
+                        <div class="flex-auto">
+                            {{quote.delay}}
+                        </div>
+                        <div class="flex-auto">
+                            {{quote.value}}
+                        </div>
+                        <div class="flex-auto">
+                            {{quote.message}}
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+             </ng-container>
+             
+             <ng-container *ngIf="(view | async) == 'AJAX'">
+                 <div>
+                     <h1>{{title}}</h1>
+                     <ul *ngFor="let i of data">
+                         <li>{{i.id}}: {{i.name}}</li>
+                     </ul>
+                 </div>
+             </ng-container>   
 
         </div>
 

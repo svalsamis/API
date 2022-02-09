@@ -1,29 +1,65 @@
-<div class="flex flex-col flex-auto min-w-0 w-full min-w-full max-w-full h-full min-h-full max-h-full quotation" >
-  <!-- Header -->
-  <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
-    <div class="flex-1 min-w-0">
-      
-      <a mat-flat-button color="primary" [routerLink]="['/quotation']" routerLinkActive="router-link-active">
+
+<div 
+fxLayout="column" 
+fxFlexFill 
+class="quotation-auto">
+
+  <div fxLayout="row wrap">
+    <div fxFlex="none" class="pl-4">
+      <a mat-flat-button [routerLink]="['/quotation']" routerLinkActive="router-link-active">
         <mat-icon svgIcon="heroicons_outline:arrow-sm-left"></mat-icon>
         Επιστροφή στις προσφορές
       </a>
-        
     </div>
-    <div  class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-        <!-- Breadcrumbs -->
-        <!-- <div class="flex flex-wrap items-center font-medium">
-            <div>
-                <a class="whitespace-nowrap text-primary-500">User Interface</a>
-            </div>
-        </div> -->
-        <!-- Title -->
-        <div class="mt-2">
-          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate text-accent-700">
-            Προσφορά Οχήματος <i class="fa fa-car mr-2"></i>
-          </h2>
+    <div fxFlex fxLayoutAlign="end center" class="pr-4" >
+      <h2 class="text-lg md:text-xl font-bold tracking-tight leading-7 sm:leading-10 truncate text-accent-700 text-right">
+        Προσφορά Οχήματος <i class="fa fa-car mr-2"></i>
+      </h2>
+    </div>
+  </div>
+  <div fxLayout="row wrap" fxFlex>
+    <div fxFlex="30" class="shadow hover:shadow-lg border-slate-200">
+        <app-quotation-auto-risk 
+          [risk]="QuotationModel.risk"
+          (usageChanged)="setUsage($event)"
+        ></app-quotation-auto-risk>
+    </div>
+    <!-- <div class="flex-grow"> -->
+    <div fxFlex fxLayout="column" fxFill>
+        <div class="text-center">
+          <mat-button-toggle-group name="category" [value]="selectedCategory" (change)="changeCategory($event)" vertical="false">
+              <mat-button-toggle *ngFor="let cat of QuotationModel.categories" [value]="cat.code">
+                  {{cat.name}}
+              </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div fxFlex
+             class="p-4"
+             fuseScrollbar
+             fuseScrollbarOptions="{suppressScrollX: true}">
+             <ng-container *ngIf="loading">
+                <div style="display:flex;height:100%;align-items: center;justify-content: center;font-size:2rem;color:gray">Φορτώνω τα προϊόντα ....</div>
+             </ng-container>
+             <ng-container *ngIf="!loading">
+              <app-quotation-row 
+                  [quote]="quote"   
+                  *ngFor="let quote of QuoteDefinitions | async">
+              </app-quotation-row>
+             </ng-container>
+              
           
         </div>
+        <!-- <div class="flex flex-col flex-grow" 
+          fuseScrollbar
+          [fuseScrollbarOptions]="{suppressScrollX: true}">
+            <app-quotation-row 
+              [quote]="quote"   
+              *ngFor="let quote of QuoteDefinitions | async">
+            </app-quotation-row>
+        </div> -->
+      <!-- </div> -->
+        
     </div>
-    <!-- Actions -->
-
   </div>
+
+</div>

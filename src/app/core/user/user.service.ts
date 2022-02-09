@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { User } from 'app/core/user/user.types';
 import { InfodromioUser } from '../framework/InfodromioUser';
 import { GlobalFramework } from '../framework/GlobalFramework';
+import { GlobalService } from '../services/global-service.service';
 
 @Injectable({
     providedIn: 'root'
@@ -33,6 +34,7 @@ export class UserService
     {
         // Store the value
         GlobalFramework.CurrentUser = value;
+        
         this._user.next(value);
     }
 

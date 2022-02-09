@@ -16,6 +16,7 @@ import { SignalRConfiguration, SignalRModule } from 'ng2-signalr';
 import { SignalRHelperService } from './core/services/signalR-helper.service';
 import { AuthService } from './core/auth/auth.service';
 import { LoadSettingsService } from './core/services/load-settings.service';
+import { SigletonModule } from './core/sigleton.module';
 
 const routerConfig: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
@@ -54,7 +55,7 @@ export function loadSettings(srv: LoadSettingsService) {
         FuseModule,
         FuseConfigModule.forRoot(appConfig),
         FuseMockApiModule.forRoot(mockApiServices),
-
+        SigletonModule.forRoot(),
         // Core module of your application
         CoreModule,
 

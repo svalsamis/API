@@ -10,11 +10,14 @@ import { UserService } from '../user/user.service';
   providedIn: 'root'
 })
 export class GlobalService {
-
+  headers: HttpHeaders;
   constructor(private userSrv: UserService) { 
     userSrv.user$.subscribe(() => {
-      this.doCreateHeaders();
+      this.headers = this.doCreateHeaders();
     });
+  }
+  public getHeaders() {
+    return this.doCreateHeaders();
   }
   public get AppSettings(): AppSettings {
     return GlobalFramework.AppSettings;
@@ -33,17 +36,21 @@ export class GlobalService {
     let headers: HttpHeaders = new HttpHeaders();
     let salespointId = GlobalFramework.CurrentUser.salespointId || 0;
     let userId = GlobalFramework.CurrentUser.userId || 0;
+    let token = GlobalFramework.CurrentUser.token;
+    let portalId = GlobalFramework.CurrentUser.portalId.toString();
+    let sessionId = GlobalFramework.AppSettings.sessionId;
+    let hubCId = this.AppSettings.hubCId;
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('salesPointId', salespointId.toString());
     headers = headers.set('userId', userId.toString());
-    headers = headers.set('token', GlobalFramework.CurrentUser.token);
-    headers = headers.set('portalServiceId', GlobalFramework.CurrentUser.portalId.toString());
-    headers = headers.set('idrKey', GlobalFramework.CurrentUser.token);
-    
+    headers = headers.set('token', token);
+    headers = headers.set('portalServiceId', portalId);
+    headers = headers.set('idrKey', token);
+    headers = headers.set('sessionId', sessionId);
     headers = headers.set('requestGUID', "null");
     
-    headers = headers.set('hubCId', FuseMockApiUtils.guid());
-
+    headers = headers.set('hubCId', hubCId);
+    headers = headers.set('hermesAppProfile', 'B2B');
     
     const key = salespointId.toString() + userId.toString() + GlobalFramework.CurrentUser.token + GlobalFramework.CurrentUser.portalId.toString();
     const hash = SHA512(key).toString();

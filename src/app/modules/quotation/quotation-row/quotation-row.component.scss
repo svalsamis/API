@@ -1,0 +1,20 @@
+.quotation-row {
+    .company-logo {
+        width: 100px;
+    }
+    .product-button {
+     min-width: 200px;
+     font-size: .8rem;   
+     max-width: 200px;   
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     text-decoration-line: underline;
+     
+     
+    }
+    .fuse-mat-rounded {
+        border-radius: 4px;
+    }
+    
+}

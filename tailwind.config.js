@@ -104,7 +104,7 @@ const config = {
             'xs'  : '0.625rem',
             'sm'  : '0.75rem',
             'md'  : '0.8125rem',
-            'base': '0.875rem',
+            'base': '0.89rem',
             'lg'  : '1rem',
             'xl'  : '1.125rem',
             '2xl' : '1.25rem',

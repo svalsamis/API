@@ -1,3 +1,4 @@
+import { FuseMockApiUtils } from "@fuse/lib/mock-api";
 import { InfodromioUser } from "./InfodromioUser";
 
 export class AppSettings {
@@ -51,6 +52,11 @@ export class AppSettings {
     public testMode: boolean = false;
     public version: string = "1";
     public hermesCommunitySpId: number = 102;
+    public sessionId: string;
+    public hubCId: string;
+    constructor() {
+        this.hubCId = FuseMockApiUtils.guid();
+    }
 
 }
 

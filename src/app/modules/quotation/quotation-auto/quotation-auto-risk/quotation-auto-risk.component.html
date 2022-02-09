@@ -1,0 +1,38 @@
+<form fxLayout="column" #frm="ngForm" (ngSubmit)="updateRisk(frm)" class="quotation-auto-risk" fxFlexFill fxLayoutAlign="start stretch">
+  <div class="md-text-lg font-bold text-accent-700">Στοιχεία οχήματος</div>
+  <div fxLayout.gt-sm="row" fxFlex.gt-sm fxLayoutAlign.gt-sm="space-around stretch" fxLayoutGap.gt-sm="5px">
+    <div fxFlex.gt-sm>
+      <mat-form-field [appearance]="appearance">
+        <mat-label>Χρήση</mat-label>
+        <mat-select
+          #usageId="ngModel"
+          [(ngModel)]="risk.UsageId" 
+          name="UsageId"
+          required
+          (selectionChange)="setUsage($event)"
+          placeholder="Χρήση οχήματος">
+          <mat-option *ngFor="let u of usages | async" [value]="u.ItemId">
+              {{u.Name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="usageId.errors?.required">Υποχρεωτικό πεδίο</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxFlex.gt-sm="none" *ngIf="risk.UsageId == 1" fxLayout.gt-sm="center center" class="chk-electric">
+        <mat-checkbox #electric="ngModel" [(ngModel)]="risk.electric" name="electric" color="primary">Ηλεκτροκίνητο</mat-checkbox>
+    </div>
+    <div fxFlex.gt-sm="100px">
+      <mat-form-field [appearance]="appearance">
+        <mat-label>Πινακίδα</mat-label>
+        <input matInput name="Plate"
+                   #plate="ngModel"
+                   [ngModel]="risk.Plate"
+                   type="text"
+                   required
+                   placeholder="Πινακίδα">
+            <mat-error *ngIf="plate.errors?.required">Υποχρεωτικό πεδίο</mat-error>
+      </mat-form-field>
+    </div>
+    
+  </div>
+</form>
